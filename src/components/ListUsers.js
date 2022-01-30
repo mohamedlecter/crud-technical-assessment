@@ -3,12 +3,15 @@ import Axios from "axios";
 import PostCard from "./PostCard";
 import UserCard from "./UserCard";
 import { Link } from "react-router-dom";
+import API from "../api/api";
+import UserSearch from "./UserSearch";
+import PostSearch from "./PostSearch";
 
 const ListUsers = () => {
-  const [listItems, setListItems] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [users, SetUsers] = useState([]);
   const reqUserList = () => {
-    Axios.get("https://gorest.co.in/public-api/users").then((res) => {
+    Axios.get(API.users).then((res) => {
       SetUsers(res.data.data);
     });
   };
@@ -17,8 +20,8 @@ const ListUsers = () => {
   }, []);
 
   const reqPostList = () => {
-    Axios.get("https://gorest.co.in/public-api/posts").then((res) => {
-      setListItems(res.data.data);
+    Axios.get(API.posts).then((res) => {
+      setPosts(res.data.data);
     });
   };
   useEffect(() => {
@@ -30,8 +33,9 @@ const ListUsers = () => {
       <li>
         <Link to="/add-post">Add</Link>
       </li>
+      <PostSearch />
       <ul>
-        {listItems.map((post) => (
+        {posts.map((post) => (
           <li key={post.id}>
             <PostCard post={post} reqPostList={reqPostList}></PostCard>
           </li>
@@ -40,6 +44,7 @@ const ListUsers = () => {
       <li>
         <Link to="/add-contact">Add</Link>
       </li>
+      <UserSearch />
       <ul>
         {users.map((user) => (
           <li key={user.id}>

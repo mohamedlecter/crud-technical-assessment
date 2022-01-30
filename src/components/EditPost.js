@@ -2,19 +2,20 @@ import Axios from "axios";
 import React, { useState, useEffect } from "react";
 import API from "../api/api";
 import swal from "sweetalert";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function EditPost(props) {
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   let { id } = useParams();
+  let navigate = useNavigate();
 
   console.log(id);
   // let id = props.match.params.id;
   useEffect(() => {
     setLoading(true);
-    Axios.get(API.Url + "/" + id)
+    Axios.get(API.posts + "/" + id)
       .then((res) => {
         setLoading(false);
         setTitle(res.data.data.title);
@@ -22,24 +23,29 @@ export default function EditPost(props) {
       })
       .catch(() => {
         setLoading(false);
-        props.history.push("/");
+        navigate("/");
       });
   }, [id]); // eslint-disable-line react-hooks/exhaustive-deps
   const handlerSub = (e) => {
     e.preventDefault();
-    Axios.patch(API.Url + "/" + id, {
+    Axios.patch(API.posts + "/" + id, {
       title,
       body,
-    }).then((res) => {
-      if (res.data.code === 200) {
-        props.history.push("/");
-        return swal(
-          "Good job!",
-          `Changes saved user Id ${res.data.data.id}`,
-          "success"
-        );
-      }
-    });
+    })
+      .then((res) => {
+        if (res.data.code === 200) {
+          navigate("/");
+          console.log(res.data.data);
+          return swal(
+            "Post Edited",
+            `Changes saved to post titled ${res.data.data.title}`,
+            "success"
+          );
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   const handlerChangeEmail = (e) => {
     setBody(e.target.value);

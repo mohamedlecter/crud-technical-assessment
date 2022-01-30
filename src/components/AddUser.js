@@ -2,29 +2,36 @@ import Axios from "axios";
 import React, { useState } from "react";
 import API from "../api/api";
 import swal from "sweetalert";
+import { useNavigate } from "react-router";
 
 export default function AddUser(props) {
   const [name, setName] = useState("");
   const [gender, setGender] = useState("Male");
   const [Userstate, setUserState] = useState("Active");
   const [email, setEmail] = useState("");
+  let navigate = useNavigate();
+
   const handlerSub = (e) => {
     e.preventDefault();
-    Axios.post("https://gorest.co.in/public-api/users", {
+    Axios.post(API.users, {
       name,
       email,
       gender,
       status: Userstate,
-    }).then((res) => {
-      if (res.data.code === 201) {
-        props.history.push("/");
-        swal(
-          "Good job!",
-          `New Post Created! with Id ${res.data.id}`,
-          "success"
-        );
-      }
-    });
+    })
+      .then((res) => {
+        if (res.data.code === 201) {
+          navigate("/");
+          swal(
+            "Good job!",
+            `New Post Created! with Id ${res.data.id}`,
+            "success"
+          );
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   const handlerChangeEmail = (e) => {
     setEmail(e.target.value);

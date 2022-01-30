@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import API from "../api/api";
 
-export default function PostCard({ post, reqList }) {
+export default function PostCard({ post, reqPostList }) {
   const handlerDelete = (e) => {
     swal({
       title: "Are you sure?",
@@ -12,18 +12,22 @@ export default function PostCard({ post, reqList }) {
       icon: "warning",
       buttons: true,
       dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        Axios.delete(API.Url + "/" + e.target.id).then((res) => {
-          reqList();
-          return swal("User has been deleted!", {
-            icon: "success",
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+          Axios.delete(API.posts + "/" + e.target.id).then((res) => {
+            reqPostList();
+            return swal("Post has been deleted!", {
+              icon: "success",
+            });
           });
-        });
-      } else {
-        swal("User not deleted");
-      }
-    });
+        } else {
+          swal("User not deleted");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div className="user">

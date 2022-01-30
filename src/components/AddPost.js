@@ -2,25 +2,32 @@ import Axios from "axios";
 import React, { useState } from "react";
 import API from "../api/api";
 import swal from "sweetalert";
+import { useNavigate } from "react-router";
 
 export default function AddPost(props) {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  let navigate = useNavigate();
+
   const handlerSub = (e) => {
     e.preventDefault();
-    Axios.post("https://gorest.co.in/public-api/posts", {
+    Axios.post(API.posts, {
       title,
       body,
-    }).then((res) => {
-      if (res.data.code === 201) {
-        props.history.push("/");
-        swal(
-          "Good job!",
-          `New Post Created! with Id ${res.data.id}`,
-          "success"
-        );
-      }
-    });
+    })
+      .then((res) => {
+        if (res.data.code === 201) {
+          navigate("/");
+          swal(
+            "Good job!",
+            `New Post Created! with Id ${res.data.id}`,
+            "success"
+          );
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   const handlerChangeTitle = (e) => {
     setTitle(e.target.value);
