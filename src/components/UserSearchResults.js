@@ -4,7 +4,8 @@ import UserCard from "./UserCard";
 import API from "../api/api";
 import UserSearch from "./UserSearch";
 import { useHistory, useParams } from "react-router-dom";
-
+import NavBar from "./NavBar";
+import "../styles/users.css";
 export default function UserSearchResults(props) {
   const [listItems, setListItems] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -13,9 +14,6 @@ export default function UserSearchResults(props) {
     Axios.get(API.users + "?name=" + name)
       .then((res) => {
         if (res.data.data.length === 0) {
-          // code 200 ! void data
-          //redirect maybe
-          // console.log(props);
           setLoading(false);
           setListItems(res.data.data);
         } else {
@@ -25,36 +23,40 @@ export default function UserSearchResults(props) {
       })
       .catch(() => setLoading(false));
   };
-  // let name = props.match.params.name;
   let { name } = useParams();
 
   console.log(name);
 
   useEffect(() => {
     reqList();
-  }, [name]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [name]);
 
   return (
-    <div className="List">
-      <h1>List Users</h1>
-      <UserSearch />
-      {listItems.length !== 0 ? (
-        <ul>
-          {listItems.map((user) => (
-            <li key={user.id}>
-              <UserCard user={user} reqList={reqList}></UserCard>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <div>
-          {loading ? (
-            <div className="spiner"></div>
-          ) : (
-            <div>No hay Resultados...</div>
-          )}
+    <>
+      <NavBar />
+      <div className="container">
+        <div className="header">
+          <h2 style={{ padding: 0, margin: 0 }}>Contacts</h2>
+          <UserSearch />
         </div>
-      )}
-    </div>
+        {listItems.length !== 0 ? (
+          <ul className="usersContainer">
+            {listItems.map((user) => (
+              <li key={user.id} className="userCard">
+                <UserCard user={user} reqList={reqList}></UserCard>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div>
+            {loading ? (
+              <div className="spiner"></div>
+            ) : (
+              <div>No users were found</div>
+            )}
+          </div>
+        )}
+      </div>
+    </>
   );
 }

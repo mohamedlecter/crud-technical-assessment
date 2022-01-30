@@ -1,38 +1,114 @@
-.App {
-  text-align: center;
+:root {
+  --blue: #007acd;
+  --light-blue: #02a8b1;
+  --dark-blue: #023a5f;
+  --red: #d82057;
+  --white-gray: #f2f2f4;
+  --gray: #ebe5e5;
+  --white: #F2F2F2
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+
+.addForm {
+  padding-top: 20px;
+  width: 30%;
+  margin: 20px auto;
+  border-radius: 1em;
+  border: 2px black solid
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.addForm .status {
+  padding: 10px;
+}
+
+.addForm .status select {
+  outline: 0;
+  border: none;
+  border-radius: .2em;
+  margin-left: 2px;
+}
+
+.addForm-input {
+  display: block;
+  height: 35px;
+  font-size: 17px;
+  width: 90%;
+  margin: 10px auto;
+  border-radius: .5em;
+  outline: 0;
+}
+
+.addForm .selectors {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.addForm .selectors .gender {
+  margin: 5px 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.addForm .selectors .gender * {
+  text-align: left;
+  padding: 3px 0;
+}
+
+.spiner {
+  margin-top: 20px;
+  display: inline-block;
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 5px 0px black;
+  border-radius: 50%;
+  border-left: 5px solid #1f9;
+  width: 50px;
+  height: 50px;
+  animation: giro 1s infinite;
+}
+.btn {
+  display: inline-block;
+  margin: 10px 140px;
+  padding: 3px;
+  color: white;
+  border: 1px solid white;
+  border-radius: .7em;
+  background: transparent;
+}
+/* @media screen and (min-width: 600px) {
+  .addForm, .search {
+    width: 40%;
+    margin: auto;
   }
-  to {
-    transform: rotate(360deg);
+  .content {
+    width: 60%;
+    margin: auto;
   }
+} */
+@media screen and (max-width: 960px){
+  
+.addForm {
+  padding-top: 20px;
+  /* width: 10%; */
+  margin: 20px auto;
+  border-radius: 1em;
+  border: 2px black solid
+}
+/* .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+}
+
+@media screen and (max-width: 450px){
+  
 }

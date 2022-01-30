@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import API from "../api/api";
 import swal from "sweetalert";
 import { useNavigate } from "react-router";
+import NavBar from "./NavBar";
+import "../styles/addPost.css";
+import { Button } from "@material-ui/core";
 
 export default function AddPost(props) {
   const [title, setTitle] = useState("");
@@ -16,6 +19,7 @@ export default function AddPost(props) {
       body,
     })
       .then((res) => {
+        console.log(res.data);
         if (res.data.code === 201) {
           navigate("/");
           swal(
@@ -28,6 +32,7 @@ export default function AddPost(props) {
       .catch((error) => {
         console.log(error);
       });
+    console.log(title);
   };
   const handlerChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -37,31 +42,34 @@ export default function AddPost(props) {
   };
 
   return (
-    <div className="Add-user">
-      <h2>Add New Post</h2>
-      <form onSubmit={handlerSub} className="addForm">
-        <input
-          className="addForm-input"
-          onChange={handlerChangeTitle}
-          value={title}
-          name="title"
-          type="text"
-          placeholder="title"
-          required
-        />
-        <input
-          className="addForm-input"
-          onChange={handlerChangeBody}
-          value={body}
-          name="body"
-          placeholder="body"
-          required
-        />
-        <button className="btn" type="submit">
-          {" "}
-          ADD contact
-        </button>
-      </form>
-    </div>
+    <>
+      <NavBar />
+      <div className="conatiner">
+        <h2>Add New Post</h2>
+        <form onSubmit={handlerSub} className="form">
+          <input
+            className="formInput"
+            onChange={handlerChangeTitle}
+            value={title}
+            name="title"
+            type="text"
+            placeholder="title"
+            required
+          />
+          <input
+            className="formInput"
+            onChange={handlerChangeBody}
+            value={body}
+            name="body"
+            placeholder="body"
+            required
+          />
+          <div className="btn">
+            <Button type="submit">ADD POST</Button>
+          </div>
+        </form>
+      </div>
+      <div style={{ backgroundColor: "#007acd", height: "280px" }}></div>
+    </>
   );
 }

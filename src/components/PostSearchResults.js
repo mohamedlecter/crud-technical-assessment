@@ -5,57 +5,60 @@ import API from "../api/api";
 import PostSearch from "./PostSearch";
 import { useHistory, useParams } from "react-router-dom";
 import PostCard from "./PostCard";
+import "../styles/posts.css";
+import NavBar from "./NavBar";
 
 export default function PostSearchResults(props) {
-  const [listItems, setListItems] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const reqPostList = () => {
     setLoading(true);
     Axios.get(API.posts + "?title=" + title)
       .then((res) => {
         if (res.data.data.length === 0) {
-          // code 200 ! void data
-          //redirect maybe
-          // console.log(props);
           setLoading(false);
-          setListItems(res.data.data);
+          setPosts(res.data.data);
         } else {
           setLoading(false);
-          setListItems(res.data.data);
+          setPosts(res.data.data);
         }
       })
       .catch(() => setLoading(false));
   };
-  // let name = props.match.params.name;
   let { title } = useParams();
 
   console.log(title);
 
   useEffect(() => {
     reqPostList();
-  }, [title]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [title]);
 
   return (
-    <div className="List">
-      <h1>List Posts</h1>
-      <PostSearch />
-      {listItems.length !== 0 ? (
-        <ul>
-          {listItems.map((post) => (
-            <li key={post.id}>
-              <PostCard post={post} reqList={reqPostList}></PostCard>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <div>
-          {loading ? (
-            <div className="spiner"></div>
-          ) : (
-            <div>No hay Resultados...</div>
-          )}
+    <>
+      <NavBar />
+      <div className="container">
+        <div className="header">
+          <h2 style={{ padding: 0, margin: 0 }}>Posts</h2>
+          <PostSearch />
         </div>
-      )}
-    </div>
+        {posts.length !== 0 ? (
+          <ul className="postsContainer">
+            {posts.map((post) => (
+              <li key={post.id} className="postCard">
+                <PostCard post={post} reqList={reqPostList}></PostCard>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div>
+            {loading ? (
+              <div className="spiner"></div>
+            ) : (
+              <div>No posts with were found</div>
+            )}
+          </div>
+        )}
+      </div>
+    </>
   );
 }

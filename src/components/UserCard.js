@@ -36,13 +36,24 @@ export default function UserCard({ user, reqUserList }) {
       <div className="user-email">Email: {user.email}</div>
       <div className="user-gender">Gender: {user.gender}</div>
 
-      <div className="actions">
-        <div className="delete">
-          <i onClick={handlerDelete} id={user.id} className="fa fa-trash"></i>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          alignContent: "center",
+        }}
+      >
+        <div>
+          <i
+            onClick={handlerDelete}
+            id={user.id}
+            style={{ color: "var(--red)" }}
+            className="fa fa-trash"
+          ></i>
         </div>
-        <div className="edit">
+        <div style={{ marginLeft: " 12px" }}>
           <Link to={`/edit-contact/${user.id}`}>
-            <i className="fa fa-edit"></i>
+            <i className="fa fa-edit" style={{ color: "white" }}></i>
           </Link>
         </div>
       </div>

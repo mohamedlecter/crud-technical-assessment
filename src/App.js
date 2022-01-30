@@ -7,11 +7,14 @@ import AddPost from "./components/AddPost";
 import EditPost from "./components/EditPost";
 import UserSearchResults from "./components/UserSearchResults";
 import PostSearchResults from "./components/PostSearchResults";
+import ListPosts from "./components/ListPosts";
+import "./App.css";
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={<ListUsers />}></Route>
+        <Route exact path="/" element={<ListPosts />}></Route>
+        <Route exact path="/contacts" element={<ListUsers />}></Route>
         <Route exact path="/add-contact" element={<AddUser />}></Route>
         <Route exact path="/add-post" element={<AddPost />}></Route>
         <Route path="/edit-contact/:id" element={<EditUser />}></Route>

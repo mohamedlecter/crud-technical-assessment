@@ -32,16 +32,27 @@ export default function PostCard({ post, reqPostList }) {
   return (
     <div className="user">
       <div className="user-name">id: {post.id}</div>
-      <div className="user-email">title: {post.title}</div>
-      <div className="user-gender">body: {post.body}</div>
+      <div className="user-email">title: {post.title.substring(0, 30)}</div>
+      <div className="user-gender">body: {post.body.substring(0, 150)}</div>
 
-      <div className="actions">
-        <div className="delete">
-          <i onClick={handlerDelete} id={post.id} className="fa fa-trash"></i>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          alignContent: "center",
+        }}
+      >
+        <div>
+          <i
+            onClick={handlerDelete}
+            id={post.id}
+            style={{ color: "var(--red)" }}
+            className="fa fa-trash"
+          ></i>
         </div>
-        <div className="edit">
+        <div style={{ marginLeft: " 12px" }}>
           <Link to={`/edit-post/${post.id}`}>
-            <i className="fa fa-edit"></i>
+            <i style={{ color: "white" }} className="fa fa-edit"></i>
           </Link>
         </div>
       </div>

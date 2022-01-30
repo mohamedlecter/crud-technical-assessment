@@ -3,7 +3,9 @@ import React, { useState, useEffect } from "react";
 import API from "../api/api";
 import swal from "sweetalert";
 import { useNavigate, useParams } from "react-router-dom";
-
+import NavBar from "./NavBar";
+import "../styles/addPost.css";
+import { Button } from "@material-ui/core";
 export default function EditUser(props) {
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
@@ -40,7 +42,7 @@ export default function EditUser(props) {
     }).then((res) => {
       console.log(res.data.code);
       if (res.data.code === 200) {
-        navigate("/");
+        navigate("/contacts");
         return swal(
           "User Edited",
           `Changes saved user Id ${res.data.data.id}`,
@@ -62,82 +64,93 @@ export default function EditUser(props) {
     return <div className="spiner"></div>;
   } else {
     return (
-      <div className="Add-user">
-        <h2>Edit User</h2>
-        <form onSubmit={handlerSub} className="addForm">
-          <input
-            className="addForm-input"
-            onChange={handlerChangeName}
-            value={name}
-            name="name"
-            type="text"
-            placeholder="Name"
-            required
-          />
-          <input
-            className="addForm-input"
-            onChange={handlerChangeEmail}
-            value={email}
-            name="email"
-            type="email"
-            placeholder="Email"
-            required
-          />
-          <div className="selectors">
-            <div className="gender">
-              <p>Gender:</p>
-              {gender === "Male" ? (
-                <>
-                  <div>
-                    <input
-                      type="radio"
-                      name="gender"
-                      defaultChecked
-                      value="Male"
-                    />
-                    <label htmlFor="Male">Male</label>
-                  </div>
-                  <div>
-                    <input type="radio" name="gender" value="Female" disabled />
-                    <label htmlFor="Female">Female</label>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div>
-                    <input type="radio" name="gender" value="Male" disabled />
-                    <label htmlFor="Male">Male</label>
-                  </div>
-                  <div>
-                    <input
-                      type="radio"
-                      name="gender"
-                      defaultChecked
-                      value="Female"
-                    />
-                    <label htmlFor="Female">Female</label>
-                  </div>
-                </>
-              )}
+      <>
+        <NavBar />
+        <div style={{ backgroundColor: "#007acd" }} className="container">
+          <h2>Edit User</h2>
+          <form onSubmit={handlerSub} className="form">
+            <input
+              className="formInput"
+              onChange={handlerChangeName}
+              value={name}
+              name="name"
+              type="text"
+              placeholder="Name"
+              required
+            />
+            <input
+              className="formInput"
+              onChange={handlerChangeEmail}
+              value={email}
+              name="email"
+              type="email"
+              placeholder="Email"
+              required
+            />
+            <div
+              className="selectors"
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                display: "flex",
+              }}
+            >
+              <div className="gender">
+                <p>Gender:</p>
+                {gender === "Male" ? (
+                  <>
+                    <div>
+                      <input
+                        type="radio"
+                        name="gender"
+                        defaultChecked
+                        value="Male"
+                      />
+                      <label htmlFor="Male">Male</label>
+                    </div>
+                    <div>
+                      <input
+                        type="radio"
+                        name="gender"
+                        value="Female"
+                        disabled
+                      />
+                      <label htmlFor="Female">Female</label>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div>
+                      <input type="radio" name="gender" value="Male" disabled />
+                      <label htmlFor="Male">Male</label>
+                    </div>
+                    <div>
+                      <input
+                        type="radio"
+                        name="gender"
+                        defaultChecked
+                        value="Female"
+                      />
+                      <label htmlFor="Female">Female</label>
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
-            <div className="status">
-              <label htmlFor="status">Select Status</label>
-              <select
-                value={Userstate}
-                name="status"
-                onChange={handlerUserState}
-              >
-                <option value="Active">Active</option>
-                <option value="Inactive">Inactive</option>
-              </select>
+            <div
+              className="btn"
+              style={{
+                position: "absolute",
+                left: "530px",
+                bottom: "270px",
+              }}
+            >
+              <Button type="submit">Save</Button>
             </div>
-          </div>
-          <button className="btn" type="submit">
-            {" "}
-            Save
-          </button>
-        </form>
-      </div>
+          </form>
+          <div style={{ backgroundColor: "#007acd", height: "340px" }}></div>
+        </div>
+      </>
     );
   }
 }

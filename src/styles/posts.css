@@ -1,0 +1,43 @@
+.container {
+  background-color:#007acd ;
+}
+.header {
+  justify-content: center;
+  align-items:center;
+  display:grid;
+}
+.header h2{
+  color: white;
+}
+.postsContainer{
+  display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 20px;
+	padding: 40px 50px;
+	/* padding-left: 50px; */
+	margin: 0 auto;
+	justify-content: space-around;
+	align-items: center;
+  list-style:none;
+}
+.postCard{
+  border: 2px black solid;
+   border-radius: 10px;
+  color: white;
+  padding: 7px;
+} 
+
+@media screen and (max-width: 960px) {
+	.postsContainer {
+		grid-template-columns: repeat(2, 1fr);
+		padding-left: 50px;
+	}
+}
+
+@media screen and (max-width: 450px) {
+	.postsContainer {
+		grid-template-columns: repeat(1, 1fr);
+		justify-content: center;
+		align-items: center;
+	}
+}
