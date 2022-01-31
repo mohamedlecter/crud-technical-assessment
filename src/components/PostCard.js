@@ -42,6 +42,11 @@ export default function PostCard({ post, reqPostList }) {
           alignContent: "center",
         }}
       >
+        <div style={{ marginRight: " 12px" }}>
+          <Link to={`/edit-post/${post.id}`}>
+            <i style={{ color: "white" }} className="fa fa-edit"></i>
+          </Link>
+        </div>
         <div>
           <i
             onClick={handlerDelete}
@@ -49,11 +54,6 @@ export default function PostCard({ post, reqPostList }) {
             style={{ color: "var(--red)" }}
             className="fa fa-trash"
           ></i>
-        </div>
-        <div style={{ marginLeft: " 12px" }}>
-          <Link to={`/edit-post/${post.id}`}>
-            <i style={{ color: "white" }} className="fa fa-edit"></i>
-          </Link>
         </div>
       </div>
     </div>

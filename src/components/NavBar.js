@@ -22,17 +22,15 @@ export default function NavBar() {
           <li className="nav-item">
             <Link to="/contacts">contacts</Link>
           </li>
-          {/* <li className="nav-item">
-            <Link to="/notes">Add contact </Link>
-          </li> */}
-          <li className="nav-item" id="nav-btn2">
-            <Link to="/add-post">
-              <Button>Add Post</Button>
-            </Link>
-          </li>
           <li className="nav-item" id="nav-btn">
             <Link to="/add-contact">
               <Button>Add contact </Button>
+            </Link>
+          </li>
+
+          <li className="nav-item" id="nav-btn2">
+            <Link to="/add-post">
+              <Button>Add Post</Button>
             </Link>
           </li>
         </ul>

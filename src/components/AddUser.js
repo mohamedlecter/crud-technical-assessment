@@ -48,7 +48,7 @@ export default function AddUser(props) {
         style={{ backgroundColor: "#007acd", paddingTop: "80px" }}
         className="conatiner"
       >
-        <h2>Add New User</h2>
+        <h2>Add New Contact</h2>
         <form onSubmit={handlerSub} className="form">
           <input
             className="formInput"

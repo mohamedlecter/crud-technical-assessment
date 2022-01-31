@@ -20,14 +20,14 @@ export default function AddPost(props) {
     })
       .then((res) => {
         console.log(res.data);
-        if (res.data.code === 201) {
-          navigate("/");
-          swal(
-            "Good job!",
-            `New Post Created! with Id ${res.data.id}`,
-            "success"
-          );
-        }
+        // if (res.data.code === 201) {
+        navigate("/");
+        swal(
+          "Good job!",
+          `New Post Created! with Id ${res.data.id}`,
+          "success"
+        );
+        // }
       })
       .catch((error) => {
         console.log(error);

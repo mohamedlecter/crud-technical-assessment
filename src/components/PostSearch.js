@@ -12,26 +12,23 @@ export default function PostSearch(props) {
   return (
     <div className="serach-bar">
       <div className="search-bar-container">
-        <form className="search-form" onSubmit={Search}>
+        <form style={{ margin: "15px 0" }} onSubmit={Search}>
           <input
             onChange={(e) => setSearch(e.target.value)}
             className="addForm-input"
             type="text"
             placeholder="Search for post"
             className=""
+            style={{
+              border: "1px white solid",
+              borderRadius: "10px",
+              padding: "5px 10px",
+            }}
           />
-          <Button className="search-bar-btn">
-            {search !== "" ? (
-              <Button className="btn" type="submit">
-                <Link to={`/search-for-post/${search}`}>
-                  <BiSearch />
-                </Link>
-              </Button>
-            ) : (
-              <Button className="btn btn-disabled" type="submit" disabled>
-                <BiSearch />
-              </Button>
-            )}
+          <Button className="btn" type="submit">
+            <Link to={`/search-for-post/${search}`}>
+              <BiSearch />
+            </Link>
           </Button>
         </form>
       </div>

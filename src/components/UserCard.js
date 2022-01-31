@@ -43,6 +43,11 @@ export default function UserCard({ user, reqUserList }) {
           alignContent: "center",
         }}
       >
+        <div style={{ marginRight: " 12px" }}>
+          <Link to={`/edit-contact/${user.id}`}>
+            <i className="fa fa-edit" style={{ color: "white" }}></i>
+          </Link>
+        </div>
         <div>
           <i
             onClick={handlerDelete}
@@ -50,11 +55,6 @@ export default function UserCard({ user, reqUserList }) {
             style={{ color: "var(--red)" }}
             className="fa fa-trash"
           ></i>
-        </div>
-        <div style={{ marginLeft: " 12px" }}>
-          <Link to={`/edit-contact/${user.id}`}>
-            <i className="fa fa-edit" style={{ color: "white" }}></i>
-          </Link>
         </div>
       </div>
     </div>

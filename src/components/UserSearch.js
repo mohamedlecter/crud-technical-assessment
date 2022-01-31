@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/users.css";
 import { BiSearch } from "react-icons/bi";
-
+import { InputBase } from "@material-ui/core";
 export default function UserSearch(props) {
   const [search, setSearch] = useState("");
   const Search = (e) => {
@@ -13,23 +13,24 @@ export default function UserSearch(props) {
   return (
     <div className="serach-bar">
       <div className="search-bar-container">
-        <form className="search-form" onSubmit={Search}>
+        <form style={{ margin: "15px 0" }} onSubmit={Search}>
           <input
             onChange={(e) => setSearch(e.target.value)}
             className="addForm-input"
             type="text"
-            placeholder="Search for User"
+            placeholder="Search for contact"
             className=""
+            style={{
+              border: "1px white solid",
+              borderRadius: "10px",
+              padding: "5px 10px",
+            }}
           />
-          {search !== "" ? (
-            <button className="btn" type="submit">
-              <Link to={`/search-for-contact/${search}`}>Search</Link>
-            </button>
-          ) : (
-            <Button className="btn btn-disabled" type="submit" disabled>
+          <Button className="btn" type="submit">
+            <Link to={`/search-for-contact/${search}`}>
               <BiSearch />
-            </Button>
-          )}
+            </Link>
+          </Button>
         </form>
       </div>
     </div>

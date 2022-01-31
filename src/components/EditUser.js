@@ -57,9 +57,6 @@ export default function EditUser(props) {
   const handlerChangeName = (e) => {
     setName(e.target.value);
   };
-  const handlerUserState = (e) => {
-    setUserState(e.target.value);
-  };
   if (loading) {
     return <div className="spiner"></div>;
   } else {
@@ -67,7 +64,7 @@ export default function EditUser(props) {
       <>
         <NavBar />
         <div style={{ backgroundColor: "#007acd" }} className="container">
-          <h2>Edit User</h2>
+          <h2>Edit Contact</h2>
           <form onSubmit={handlerSub} className="form">
             <input
               className="formInput"
@@ -92,7 +89,7 @@ export default function EditUser(props) {
               style={{
                 justifyContent: "center",
                 alignItems: "center",
-                display: "flex",
+                display: "grid",
               }}
             >
               <div className="gender">
@@ -136,16 +133,9 @@ export default function EditUser(props) {
                   </>
                 )}
               </div>
-            </div>
-            <div
-              className="btn"
-              style={{
-                position: "absolute",
-                left: "530px",
-                bottom: "270px",
-              }}
-            >
-              <Button type="submit">Save</Button>
+              <div className="btn">
+                <Button type="submit">Save</Button>
+              </div>
             </div>
           </form>
           <div style={{ backgroundColor: "#007acd", height: "340px" }}></div>
